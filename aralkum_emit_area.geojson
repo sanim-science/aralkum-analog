@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "aralkum_eastern_basin_transect",
+        "note": "Eastern Aral basin, from the last-dried center (~59.5E) to the old eastern shore (~61.3E)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [59.5, 44.6],
+          [61.3, 44.6],
+          [61.3, 45.4],
+          [59.5, 45.4],
+          [59.5, 44.6]
+        ]]
+      }
+    }
+  ]
+}
