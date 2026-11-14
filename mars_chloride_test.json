@@ -1,0 +1,52 @@
+{
+ "n_deposits": 642,
+ "n_in_band": 641,
+ "inside_closed_depression": {
+  "observed": 383,
+  "share": 0.5975039001560063,
+  "expected_local": 243.2509877672338,
+  "expected_share": 0.37948672038570014,
+  "z": 12.09278150916676
+ },
+ "F_tests": [
+  {
+   "min_area_km2": 100.0,
+   "n_deposits": 339,
+   "hits": 68,
+   "share": 0.20058997050147492,
+   "p_binomial": 0.8827507116311926,
+   "median_F": 0.5194768449994073,
+   "ks_p_vs_uniform": 0.7049910371329526,
+   "n_depressions": 160,
+   "dep_hits": 36,
+   "dep_expected": 28.72115,
+   "p_depression_level": 0.08385
+  },
+  {
+   "min_area_km2": 1000.0,
+   "n_deposits": 256,
+   "hits": 43,
+   "share": 0.16796875,
+   "p_binomial": 0.9909311910367026,
+   "median_F": 0.467461411819054,
+   "ks_p_vs_uniform": 0.07185866465558488,
+   "n_depressions": 90,
+   "dep_hits": 15,
+   "dep_expected": 14.12575,
+   "p_depression_level": 0.43925
+  },
+  {
+   "min_area_km2": 10000.0,
+   "n_deposits": 161,
+   "hits": 18,
+   "share": 0.11180124223602485,
+   "p_binomial": 0.9999375788189601,
+   "median_F": 0.4332691583408221,
+   "ks_p_vs_uniform": 0.007329677669718553,
+   "n_depressions": 34,
+   "dep_hits": 2,
+   "dep_expected": 4.62955,
+   "p_depression_level": 0.96
+  }
+ ]
+}

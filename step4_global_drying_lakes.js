@@ -1,0 +1,81 @@
+// Step 4: a global finder for drying-lake Mars analogs.
+//
+// Idea: the Aral is valuable because a big closed lake dried while satellites watched.
+// Where else on Earth did that happen? We rank every river basin (HydroBASINS level 6)
+// between 52S and 52N (where NASA EMIT can see) by how much PERMANENT lake water turned
+// into dry land between 1984 and 2021 (JRC Global Surface Water "transition" layer),
+// and record whether the basin is closed (endorheic) and how dry the climate is.
+// (EMIT coverage of the top lakes is checked afterwards in AppEEARS.)
+// If the method works, the Aral should come first.
+//
+// Run: paste into a NEW script, click Run, then in the Tasks tab click RUN on
+// "global_drying_lakes". Send us the CSV from Google Drive.
+//
+// AI disclosure: written with help from Claude (Anthropic AI assistant); run and
+// checked by the team.
+
+var gsw = ee.Image('JRC/GSW1_4/GlobalSurfaceWater');
+var tr = gsw.select('transition').unmask(0);   // 0 where never water
+// transition classes: 1 permanent, 2 new permanent, 3 lost permanent, 4 seasonal,
+// 5 new seasonal, 6 lost seasonal, 7 seasonal->permanent, 8 permanent->seasonal,
+// 9 ephemeral permanent, 10 ephemeral seasonal
+var base = ee.Image.cat(
+  tr.eq(3).rename('lost'),                                  // permanent water -> land
+  tr.eq(8).rename('p2s'),                                   // permanent -> seasonal
+  tr.eq(1).or(tr.eq(3)).or(tr.eq(8)).rename('perm84')       // permanent water in 1984
+).toFloat();
+
+// exact area: average the 30 m pixels into 300 m cells, then multiply by cell area
+var frac = base
+  .reduceResolution({reducer: ee.Reducer.mean(), maxPixels: 1024})
+  .reproject({crs: 'EPSG:4326', scale: 300});
+var km2 = frac.multiply(ee.Image.pixelArea()).divide(1e6);
+var ll = ee.Image.pixelLonLat();
+var stack = km2
+  .addBands(ll.select('latitude').multiply(km2.select('lost')).rename('latw'))
+  .addBands(ll.select('longitude').multiply(km2.select('lost')).rename('lonw'));
+
+// climate dryness: precipitation / potential evaporation, 1991-2020 (TerraClimate)
+var tc = ee.ImageCollection('IDAHO_EPSCOR/TERRACLIMATE').filterDate('1991-01-01', '2021-01-01');
+var aridity = tc.select('pr').sum()
+  .divide(tc.select('pet').sum().multiply(0.1))            // pet is stored x10
+  .rename('aridity');
+
+var band52 = ee.Geometry.Rectangle([-180, -52, 180, 52], null, false);
+var basins = ee.FeatureCollection('WWF/HydroSHEDS/v1/Basins/hybas_6').filterBounds(band52);
+
+var sums = stack.reduceRegions({
+  collection: basins, reducer: ee.Reducer.sum(), scale: 300, tileScale: 16
+}).filter(ee.Filter.gt('lost', 5));                        // at least 5 km2 lost
+
+var result = sums.map(function (f) {
+  var lost = ee.Number(f.get('lost'));
+  var lat = ee.Number(f.get('latw')).divide(lost);
+  var lon = ee.Number(f.get('lonw')).divide(lost);
+  var pt = ee.Geometry.Point([lon, lat]);
+  var ai = aridity.reduceRegion({reducer: ee.Reducer.mean(), geometry: f.geometry(),
+                                 scale: 4638, bestEffort: true}).get('aridity');
+  return ee.Feature(pt, {
+    HYBAS_ID: f.get('HYBAS_ID'),
+    ENDO: f.get('ENDO'),                 // 0 open basin, 1 part of a closed basin, 2 closed-basin sink
+    lost_perm_km2: lost,
+    perm_to_seasonal_km2: f.get('p2s'),
+    perm_1984_km2: f.get('perm84'),
+    share_lost: lost.divide(ee.Number(f.get('perm84')).max(1e-6)),
+    aridity_index: ai,                   // < 0.2 arid, 0.2-0.5 semi-arid
+    lat: lat, lon: lon
+  });
+}).sort('lost_perm_km2', false);
+
+Export.table.toDrive({
+  collection: result,
+  description: 'global_drying_lakes',
+  fileFormat: 'CSV',
+  selectors: ['HYBAS_ID', 'ENDO', 'lost_perm_km2', 'perm_to_seasonal_km2', 'perm_1984_km2',
+              'share_lost', 'aridity_index', 'lat', 'lon']
+});
+
+// quick look on the map (red = permanent water that became land, 1984-2021)
+Map.setCenter(60, 40, 3);
+Map.addLayer(tr.eq(3).selfMask(), {palette: ['d7301f']}, 'Permanent water lost 1984-2021');
+Map.addLayer(tr.eq(8).selfMask(), {palette: ['fdae61']}, 'Permanent became seasonal', false);
