@@ -1,0 +1,133 @@
+subset,date,family,n_years,n_pixels,rho_share,rho_banddepth
+all exposed seabed,20230420,calcite/dolomite (core),15,515259,-0.507,-0.536
+all exposed seabed,20230420,gypsum (core),15,515259,0.782,0.854
+all exposed seabed,20230420,clays (core),15,515259,-0.864,-0.811
+all exposed seabed,20230420,Mg-perchlorate label (non-core),15,515259,,
+all exposed seabed,20230420,other salts/sulfates (non-core),15,515259,,
+all exposed seabed,20230420,no match,15,515259,-0.693,
+all exposed seabed,20230604,calcite/dolomite (core),18,374894,0.551,0.551
+all exposed seabed,20230604,gypsum (core),18,374894,0.456,0.432
+all exposed seabed,20230604,clays (core),18,374894,-0.523,-0.54
+all exposed seabed,20230604,Mg-perchlorate label (non-core),18,374894,0.617,0.638
+all exposed seabed,20230604,other salts/sulfates (non-core),18,374894,-0.237,0.025
+all exposed seabed,20230604,no match,18,374894,-0.366,
+all exposed seabed,20230612,calcite/dolomite (core),19,964055,-0.689,-0.684
+all exposed seabed,20230612,gypsum (core),19,964055,-0.351,-0.249
+all exposed seabed,20230612,clays (core),19,964055,-0.711,-0.696
+all exposed seabed,20230612,Mg-perchlorate label (non-core),19,964055,0.28,0.28
+all exposed seabed,20230612,other salts/sulfates (non-core),19,964055,0.253,0.259
+all exposed seabed,20230612,no match,19,964055,0.716,
+all exposed seabed,20230619,calcite/dolomite (core),23,152146,-0.082,0.007
+all exposed seabed,20230619,gypsum (core),23,152146,-0.644,-0.597
+all exposed seabed,20230619,clays (core),23,152146,-0.746,-0.717
+all exposed seabed,20230619,Mg-perchlorate label (non-core),23,152146,0.817,0.782
+all exposed seabed,20230619,other salts/sulfates (non-core),23,152146,0.285,0.338
+all exposed seabed,20230619,no match,23,152146,0.195,
+all exposed seabed,20230623,calcite/dolomite (core),9,239319,0.433,0.5
+all exposed seabed,20230623,gypsum (core),9,239319,0.502,0.502
+all exposed seabed,20230623,clays (core),9,239319,-0.183,-0.233
+all exposed seabed,20230623,Mg-perchlorate label (non-core),9,239319,0.433,0.517
+all exposed seabed,20230623,other salts/sulfates (non-core),9,239319,-0.517,-0.517
+all exposed seabed,20230623,no match,9,239319,-0.433,
+all exposed seabed,20230731,calcite/dolomite (core),28,2100003,-0.951,-0.932
+all exposed seabed,20230731,gypsum (core),28,2100003,-0.173,-0.168
+all exposed seabed,20230731,clays (core),28,2100003,-0.795,-0.792
+all exposed seabed,20230731,Mg-perchlorate label (non-core),28,2100003,0.753,0.892
+all exposed seabed,20230731,other salts/sulfates (non-core),28,2100003,-0.582,-0.459
+all exposed seabed,20230731,no match,28,2100003,-0.956,
+all exposed seabed,20230804,calcite/dolomite (core),22,1265337,-0.761,-0.763
+all exposed seabed,20230804,gypsum (core),22,1265337,-0.594,-0.583
+all exposed seabed,20230804,clays (core),22,1265337,-0.761,-0.711
+all exposed seabed,20230804,Mg-perchlorate label (non-core),22,1265337,0.292,0.269
+all exposed seabed,20230804,other salts/sulfates (non-core),22,1265337,0.505,0.387
+all exposed seabed,20230804,no match,22,1265337,0.789,
+all exposed seabed,20230808,calcite/dolomite (core),19,239927,-0.45,-0.406
+all exposed seabed,20230808,gypsum (core),19,239927,-0.723,-0.711
+all exposed seabed,20230808,clays (core),19,239927,-0.153,-0.335
+all exposed seabed,20230808,Mg-perchlorate label (non-core),19,239927,0.591,0.511
+all exposed seabed,20230808,other salts/sulfates (non-core),19,239927,-0.384,-0.351
+all exposed seabed,20230808,no match,19,239927,0.556,
+all exposed seabed,20230815,calcite/dolomite (core),23,1751175,-0.526,-0.526
+all exposed seabed,20230815,gypsum (core),23,1751175,-0.78,-0.776
+all exposed seabed,20230815,clays (core),23,1751175,-0.939,-0.944
+all exposed seabed,20230815,Mg-perchlorate label (non-core),23,1751175,0.864,0.873
+all exposed seabed,20230815,other salts/sulfates (non-core),23,1751175,0.88,0.898
+all exposed seabed,20230815,no match,23,1751175,0.147,
+all exposed seabed,20230819,calcite/dolomite (core),20,671206,-0.589,-0.417
+all exposed seabed,20230819,gypsum (core),20,671206,-0.598,-0.494
+all exposed seabed,20230819,clays (core),20,671206,-0.259,-0.161
+all exposed seabed,20230819,Mg-perchlorate label (non-core),20,671206,0.106,0.032
+all exposed seabed,20230819,other salts/sulfates (non-core),20,671206,-0.177,-0.182
+all exposed seabed,20230819,no match,20,671206,0.389,
+all exposed seabed,20230823,calcite/dolomite (core),26,2313928,-0.294,-0.158
+all exposed seabed,20230823,gypsum (core),26,2313928,-0.292,-0.286
+all exposed seabed,20230823,clays (core),26,2313928,-0.964,-0.923
+all exposed seabed,20230823,Mg-perchlorate label (non-core),26,2313928,0.969,0.965
+all exposed seabed,20230823,other salts/sulfates (non-core),26,2313928,0.767,0.844
+all exposed seabed,20230823,no match,26,2313928,0.432,
+all exposed seabed,20231008,calcite/dolomite (core),13,525207,0.507,0.507
+all exposed seabed,20231008,gypsum (core),13,525207,-0.571,-0.714
+all exposed seabed,20231008,clays (core),13,525207,-0.962,-0.918
+all exposed seabed,20231008,Mg-perchlorate label (non-core),13,525207,0.786,0.775
+all exposed seabed,20231008,other salts/sulfates (non-core),13,525207,-0.821,-0.844
+all exposed seabed,20231008,no match,13,525207,0.143,
+never re-flooded,20230420,calcite/dolomite (core),14,366615,-0.666,-0.684
+never re-flooded,20230420,gypsum (core),14,366615,0.877,0.903
+never re-flooded,20230420,clays (core),14,366615,-0.833,-0.798
+never re-flooded,20230420,Mg-perchlorate label (non-core),14,366615,,
+never re-flooded,20230420,other salts/sulfates (non-core),14,366615,,
+never re-flooded,20230420,no match,14,366615,-0.864,
+never re-flooded,20230604,calcite/dolomite (core),10,52824,,
+never re-flooded,20230604,gypsum (core),10,52824,0.446,0.446
+never re-flooded,20230604,clays (core),10,52824,-0.515,-0.515
+never re-flooded,20230604,Mg-perchlorate label (non-core),10,52824,0.176,0.2
+never re-flooded,20230604,other salts/sulfates (non-core),10,52824,-0.624,-0.612
+never re-flooded,20230604,no match,10,52824,-0.394,
+never re-flooded,20230612,calcite/dolomite (core),18,586845,-0.652,-0.626
+never re-flooded,20230612,gypsum (core),18,586845,-0.258,-0.192
+never re-flooded,20230612,clays (core),18,586845,-0.622,-0.416
+never re-flooded,20230612,Mg-perchlorate label (non-core),18,586845,0.257,0.257
+never re-flooded,20230612,other salts/sulfates (non-core),18,586845,0.278,0.278
+never re-flooded,20230612,no match,18,586845,0.647,
+never re-flooded,20230619,calcite/dolomite (core),16,75824,-0.524,-0.571
+never re-flooded,20230619,gypsum (core),16,75824,0.001,0.043
+never re-flooded,20230619,clays (core),16,75824,-0.353,-0.262
+never re-flooded,20230619,Mg-perchlorate label (non-core),16,75824,0.612,0.512
+never re-flooded,20230619,other salts/sulfates (non-core),16,75824,0.747,0.797
+never re-flooded,20230619,no match,16,75824,0.165,
+never re-flooded,20230731,calcite/dolomite (core),23,781035,-0.872,-0.851
+never re-flooded,20230731,gypsum (core),23,781035,-0.018,-0.008
+never re-flooded,20230731,clays (core),23,781035,-0.534,-0.541
+never re-flooded,20230731,Mg-perchlorate label (non-core),23,781035,0.665,0.824
+never re-flooded,20230731,other salts/sulfates (non-core),23,781035,-0.464,-0.369
+never re-flooded,20230731,no match,23,781035,-0.916,
+never re-flooded,20230804,calcite/dolomite (core),21,551502,-0.691,-0.691
+never re-flooded,20230804,gypsum (core),21,551502,-0.562,-0.527
+never re-flooded,20230804,clays (core),21,551502,-0.683,-0.609
+never re-flooded,20230804,Mg-perchlorate label (non-core),21,551502,0.496,0.457
+never re-flooded,20230804,other salts/sulfates (non-core),21,551502,0.395,0.268
+never re-flooded,20230804,no match,21,551502,0.764,
+never re-flooded,20230808,calcite/dolomite (core),18,153276,-0.479,-0.45
+never re-flooded,20230808,gypsum (core),18,153276,-0.524,-0.493
+never re-flooded,20230808,clays (core),18,153276,-0.112,-0.179
+never re-flooded,20230808,Mg-perchlorate label (non-core),18,153276,0.608,0.649
+never re-flooded,20230808,other salts/sulfates (non-core),18,153276,-0.062,-0.072
+never re-flooded,20230808,no match,18,153276,0.461,
+never re-flooded,20230815,calcite/dolomite (core),16,292771,-0.574,-0.574
+never re-flooded,20230815,gypsum (core),16,292771,-0.717,-0.717
+never re-flooded,20230815,clays (core),16,292771,-0.956,-0.947
+never re-flooded,20230815,Mg-perchlorate label (non-core),16,292771,0.651,0.651
+never re-flooded,20230815,other salts/sulfates (non-core),16,292771,0.849,0.831
+never re-flooded,20230815,no match,16,292771,0.747,
+never re-flooded,20230819,calcite/dolomite (core),18,349131,-0.552,-0.404
+never re-flooded,20230819,gypsum (core),18,349131,-0.246,-0.223
+never re-flooded,20230819,clays (core),18,349131,0.106,0.102
+never re-flooded,20230819,Mg-perchlorate label (non-core),18,349131,0.236,0.212
+never re-flooded,20230819,other salts/sulfates (non-core),18,349131,-0.022,-0.036
+never re-flooded,20230819,no match,18,349131,0.3,
+never re-flooded,20230823,calcite/dolomite (core),16,448100,-0.675,-0.615
+never re-flooded,20230823,gypsum (core),16,448100,-0.646,-0.655
+never re-flooded,20230823,clays (core),16,448100,-0.909,-0.959
+never re-flooded,20230823,Mg-perchlorate label (non-core),16,448100,0.928,0.925
+never re-flooded,20230823,other salts/sulfates (non-core),16,448100,0.896,0.955
+never re-flooded,20230823,no match,16,448100,0.712,
