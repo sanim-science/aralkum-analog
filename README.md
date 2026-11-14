@@ -2,11 +2,9 @@
 
 **Two Earth analogs in Central Asia for Mars exploration: the Aralkum (Kazakhstan and Uzbekistan) and the Zhamanshin impact structure (Kazakhstan)**
 
-NASA Space Apps Challenge 2026 · Challenge: *Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars* · Team baymax2 (Universal Event)
+NASA Space Apps Challenge 2026 · Challenge: *Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars* · Team Koerziv (Universal Event)
 
 **Live map:** https://noble-maxim-504110-d7.projects.earthengine.app/view/aralkum-analog
-
-> DRAFT v3. Team: read every sentence, change what you disagree with, fill in the [bracketed] parts, and delete this line.
 
 ## Summary
 
@@ -224,7 +222,7 @@ To reproduce: run the Earth Engine scripts, request EMITL2BMIN Group 2 layers in
 We used Claude (Anthropic AI assistant) as a tool, and state where:
 
 - **Before the hackathon:** comparing challenges and suggesting candidate sites and the research question, which the team then evaluated.
-- **Code:** all Earth Engine and Python code was drafted by Claude; the team ran it, checked the outputs and reported errors that were then fixed. Each file says so in its header.
+- **Code:** Claude assisted in drafting the code; the team ran it, checked the outputs and reported errors that were then fixed. Each file says so in its header.
 - **Analysis:** Claude ran the EMIT and Landsat statistics on files the team exported and downloaded, and made the charts (computed from data, not AI-generated imagery). Claude proposed the second-instrument check, the per-scene trend test and the never-re-flooded filter.
 - **Research:** finding and summarizing papers and datasets, including the flood records that explain the 2011 and 2018 zones, the MOLA grid and the chloride deposit list.
 - **Mars test:** Claude proposed turning the Aral zones into a rule and testing it on Martian chloride deposits, wrote the code, and ran it on the files the team downloaded.
