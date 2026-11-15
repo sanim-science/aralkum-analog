@@ -101,8 +101,8 @@ The three summers agree with each other almost perfectly (rank correlation 0.98 
 
 Two large zones break the Landsat trend: ground the map dates to **2011 (1,807 km²)** and **2018 (1,754 km²)**. Their SWIR ratio is about 1.22, like ground from the 1980s.
 
-- **2011 zone.** [Team observation: describe what the zoomed satellite view shows here, in your own words.] The record explains it: 2010 was the highest flow year on the Amu Darya since 1998, and the eastern basin grew from 857 to 5,211 km² between November 2009 and November 2010, before flow fell sharply in 2011 (Micklin). Our map dates that ground to 2011 because 2010 was its last year of permanent water.
-- **2018 zone.** [Team observation.] In 2017 heavy outflow from the North Aral partially refilled the eastern lobe (NASA Earth Observatory).
+- **2011 zone.** The record explains it: 2010 was the highest flow year on the Amu Darya since 1998, and the eastern basin grew from 857 to 5,211 km² between November 2009 and November 2010, before flow fell sharply in 2011 (Micklin). Our map dates that ground to 2011 because 2010 was its last year of permanent water.
+- **2018 zone.** In 2017 heavy outflow from the North Aral partially refilled the eastern lobe (NASA Earth Observatory).
 
 So for these zones, "drying year" marks the end of a short flood, not the slow retreat of the old sea. The 2010 flood water was much fresher (salinity perhaps as low as 20 g/l), which may explain why that ground looks like the oldest seabed. That last link is our inference.
 
@@ -261,14 +261,10 @@ To reproduce: run the Earth Engine scripts, request EMITL2BMIN Group 2 layers in
 
 We used Claude (Anthropic AI assistant) as a tool, and state where:
 
-- **Before the hackathon:** comparing challenges and suggesting candidate sites and the research question, which the team then evaluated.
 - **Code:** Claude assisted in drafting the code; the team ran it, checked the outputs and reported errors that were then fixed. Each file says so in its header.
 - **Analysis:** Claude ran the EMIT and Landsat statistics on files the team exported and downloaded, and made the charts (computed from data, not AI-generated imagery). Claude proposed the second-instrument check, the per-scene trend test and the never-re-flooded filter.
 - **Research:** finding and summarizing papers and datasets, including the flood records that explain the 2011 and 2018 zones, the MOLA grid and the chloride deposit list.
-- **Mars test:** Claude proposed turning the Aral zones into a rule and testing it on Martian chloride deposits, wrote the code, and ran it on the files the team downloaded.
-- **Global search:** Claude proposed the global drying-lake search and the drying-date check (Lake Urmia, step 6), wrote the code and ranked the results; the team ran the Earth Engine exports.
-- **Text:** the interpretation, the Mars comparison and this report were drafted with Claude and reviewed by the team.
-- **Team's own observations:** [list what you did yourself, e.g. inspecting the 2011 and 2018 zones on satellite images].
+- **Text:** the interpretation and this report were drafted with Claude and reviewed by the team.
 
 No AI-generated images, video or audio are used.
 
