@@ -7,6 +7,7 @@
 //     Pekel et al. 2016, Nature 540, 418-422. Source: EC JRC/Google
 //   - NASADEM (NASA, 30 m) and Copernicus GLO-30 DEM (ESA, 30 m)
 //   - EMIT L2B mineral results (NASA) are analysed offline; see the project report
+//   - JRC Global Surface Water v1.4 transitions (global drying-lake search)
 //
 // Use of AI: this code was drafted with help from Claude (Anthropic AI assistant);
 // run, checked and modified by the team.
@@ -67,6 +68,44 @@ var ring265 = ee.Image().paint(ee.FeatureCollection([ee.Feature(zCenter.buffer(1
 var emitBox = ee.Image().paint(ee.FeatureCollection(
   [ee.Feature(ee.Geometry.Rectangle([59.5, 44.6, 61.3, 45.4]))]), 0, 2);
 
+
+// ---------------- Ground that never flooded again (datable surface) ----------------
+var stayedDry = refloodCount.eq(0).selfMask();
+
+// ---------------- Field route (field_route.csv in the repository) ----------------
+var STOPS = [
+  [1, 59.8836, 45.3330, '2015-2021', 'salt-type label 47%'],
+  [2, 59.9294, 45.2339, '2005-2014', 'clays 37%, gypsum 32%'],
+  [3, 60.3541, 45.0350, '1995-2004', 'clays 57%'],
+  [4, 60.8381, 44.9951, '1985-1994', 'clays 60%, gypsum 10%, carbonate 4%']
+];
+var stopFc = ee.FeatureCollection(STOPS.map(function (s) {
+  return ee.Feature(ee.Geometry.Point([s[1], s[2]]), {stop: s[0]});
+}));
+var routeLine = ee.FeatureCollection([ee.Feature(ee.Geometry.LineString(
+  STOPS.map(function (s) { return [s[1], s[2]]; })))]);
+
+// ---------------- Global search (step4 + step6 in the repository) ----------------
+var gswAll = ee.Image('JRC/GSW1_4/GlobalSurfaceWater');
+var lostPermanent = gswAll.select('transition').eq(3).selfMask();
+// name, lon, lat, ground left 1985-2021 (km2), share that never flooded again
+var LAKES = [
+  ['Aral Sea', 59.95, 45.10, 35258, 0.38],
+  ['Sistan Hamun lakes', 61.60, 30.60, 3443, 0.11],
+  ['Great Salt Lake', -112.55, 41.20, 3002, 0.05],
+  ['Lake Poopo', -67.10, -18.75, 2981, 0.07],
+  ['Lake Urmia', 45.52, 37.65, 2648, 0.01],
+  ['Torey lakes', 115.65, 50.05, 842, 0.18],
+  ['Colhue Huapi', -68.85, -45.50, 748, 0.19],
+  ['Malheur-Harney lakes', -119.00, 43.30, 624, 0.08],
+  ['Laguna Salada', -115.65, 32.35, 520, 0.02],
+  ['Carson Sink', -118.50, 39.90, 494, 0.01],
+  ['Lake Aksehir', 31.45, 38.55, 262, 0.40]
+];
+var lakeFc = ee.FeatureCollection(LAKES.map(function (l) {
+  return ee.Feature(ee.Geometry.Point([l[1], l[2]]), {name: l[0]});
+}));
+
 // ---------------- Map ----------------
 var RETREAT_PAL = ['08306b', '2171b5', '6baed6', 'fdae6b', 'e6550d', 'a50f15'];
 var REFLOOD_PAL = ['ffffff', 'c6dbef', '6baed6', '2171b5', '08306b'];
@@ -82,6 +121,11 @@ map.addLayer(lakeRetreat, {min: 1985, max: 2021, palette: RETREAT_PAL},
 map.addLayer(refloodCount, {min: 0, max: 8, palette: REFLOOD_PAL},
   'Aral: number of re-flood years after retreat', false);
 map.addLayer(stillWater.selfMask(), {palette: ['00ffff']}, 'Aral: still water in 2021');
+map.addLayer(stayedDry, {palette: ['1b7837']}, 'Aral: dried and never flooded again (known age)', false);
+map.addLayer(lostPermanent, {palette: ['ff3d00']}, 'World: permanent water that became land 1984-2021', false);
+map.addLayer(lakeFc.style({color: 'ff3d00', pointSize: 7, width: 2, fillColor: 'ffffff88'}), {}, 'World: top drying lakes', false);
+map.addLayer(routeLine.style({color: '000000', width: 3}), {}, 'Aral: field route');
+map.addLayer(stopFc.style({color: 'ffffff', pointSize: 8, fillColor: 'eb6834', width: 2}), {}, 'Aral: field route stops');
 map.addLayer(emitBox, {palette: ['ffff00']}, 'Aral: area of the EMIT mineral analysis', false);
 map.addLayer(ee.Terrain.hillshade(nasadem).clip(zRegion), {min: 150, max: 255},
   'Zhamanshin: hillshade (NASADEM)');
@@ -123,8 +167,9 @@ function swatch(color, text) {
 var panel = ui.Panel({style: {width: '360px'}});
 panel.add(ui.Label('A sea that became a Martian lakebed',
   {fontWeight: 'bold', fontSize: '19px', margin: '10px 8px 2px 8px'}));
-panel.add(p('Two Earth analogs in Kazakhstan for Mars exploration: the dried Aral Sea ' +
-  '(Aralkum) and the Zhamanshin impact structure. NASA Space Apps Challenge 2026.'));
+panel.add(p('The dried Aral Sea (Aralkum, Kazakhstan and Uzbekistan) as a dated analog for ' +
+  'drying Martian lakes, tested on Mars, plus the Zhamanshin impact structure. ' +
+  'NASA Space Apps Challenge 2026.'));
 panel.add(ui.Panel([
   ui.Button('Go to Aral Sea', function () { map.centerObject(roi, 7); }),
   ui.Button('Go to Zhamanshin', function () { map.centerObject(zCenter, 10); })
@@ -143,6 +188,48 @@ panel.add(p('Turn on the "re-flood years" layer (Layers, top right) to see where
   'seabed dried and flooded again, like a playa.'));
 panel.add(colorBar(REFLOOD_PAL, 0, '8+', 're-flood years after retreat'));
 
+
+panel.add(swatch('#1b7837', 'dried and never flooded again: 13,380 km2 of known age (layer off by default)'));
+
+panel.add(h('Minerals follow the drying date (NASA EMIT, 12 scenes)'));
+panel.add(p('Carbonate and clay where the sea left first, gypsum in the middle, salts last. ' +
+  'Clays fall in 12 of 12 scenes, the salt-type label rises in 11 of 11. Published field work ' +
+  'agrees on carbonate and salts.'));
+
+panel.add(h('Field route: 4 stops, 90 km, 36 years of drying'));
+STOPS.forEach(function (s) {
+  panel.add(ui.Button({
+    label: 'Stop ' + s[0] + ': dried ' + s[3] + ' (' + s[4] + ')',
+    onClick: function () { map.setCenter(s[1], s[2], 13); },
+    style: {margin: '2px 8px', stretch: 'horizontal'}
+  }));
+});
+panel.add(p('Each stop is a 1 km patch on ground that dried in one period and never flooded ' +
+  'again. Coordinates in field_route.csv. Not visited on the ground.'));
+
+panel.add(h('Global search: where else did a salt lake dry out?'));
+panel.add(p('Every dry-climate river basin from 52S to 52N, ranked by permanent water that ' +
+  'became land since 1984. The Aral ranks first. Pick a lake (turn on the "World" layers):'));
+var lakeSelect = ui.Select({
+  items: LAKES.map(function (l) {
+    return {label: l[0] + ': ' + l[3].toLocaleString() + ' km2 left, ' +
+                   Math.round(l[4] * 100) + '% never flooded again', value: l[0]};
+  }),
+  placeholder: 'Choose a drying lake',
+  onChange: function (v) {
+    LAKES.forEach(function (l) { if (l[0] === v) { map.setCenter(l[1], l[2], 9); } });
+  },
+  style: {stretch: 'horizontal', margin: '4px 8px'}
+});
+panel.add(lakeSelect);
+panel.add(p('Only the Aral leaves a large surface of known age: 37 times more ground that ' +
+  'never flooded again than the next lake. Most others are salt flats that flood again.'));
+
+panel.add(h('Tested on Mars (NASA MOLA, 642 salt deposits)'));
+panel.add(p('Martian chloride deposits sit in closed lows (60% vs 38% of nearby ground), but not ' +
+  'in the last-to-dry part where the Aral puts salts (20% vs 23% by chance). Most Martian ' +
+  'salts probably formed in small ponds, not in one big drying lake.'));
+
 panel.add(h('Zhamanshin: can 30 m data see the rim?'));
 panel.add(colorBar(ANOM_PAL, -30, 30, 'elevation anomaly (m)'));
 panel.add(swatch('#ffff00', 'classic size estimate: 13.5 km diameter'));
@@ -158,7 +245,8 @@ panel.add(p('Years with poor Landsat coverage (1984, 1985, 1988, 1990, 1995, 199
 panel.add(h('Data and credits'));
 panel.add(p('Water history: JRC Global Surface Water v1.4 from NASA/USGS Landsat ' +
   '(Source: EC JRC/Google). Elevation: NASADEM (NASA), Copernicus GLO-30 (ESA). ' +
-  'Minerals (in the report): NASA EMIT L2B.'));
+  'Minerals (in the report): NASA EMIT L2B. Mars: NASA MOLA and Mars Odyssey THEMIS ' +
+  'chloride map. Full report: github.com/sanim-science/aralkum-analog'));
 panel.add(p('Use of AI: code drafted with help from Claude (Anthropic AI assistant); ' +
   'run and checked by the team.'));
 

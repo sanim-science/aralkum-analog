@@ -6,6 +6,16 @@ NASA Space Apps Challenge 2026 · Challenge: *Identify Earth Locations that Anal
 
 **Live map:** https://noble-maxim-504110-d7.projects.earthengine.app/view/aralkum-analog
 
+## In 30 seconds
+
+![The eastern Aral seabed coloured by the year the lake left each 60 m cell](drying_map.png)
+
+- **A dated seabed.** We dated 34,964 km² of the dried Aral seabed pixel by pixel, 1985–2021, from NASA/USGS Landsat water history.
+- **Minerals follow the date.** NASA EMIT sees carbonate and clay where the sea left first, gypsum in the middle and salts last, in 12 of 12 scenes. Two of the three trends match published field work.
+- **Tested on Mars.** 642 Martian salt deposits sit in closed lows (60% vs 38% of the ground nearby), but not in the last-to-dry part where the Aral puts salts (20% vs 23% by chance). Most Martian salts probably formed in small ponds, not in one big drying lake.
+- **A global search.** Of all lakes that dried in dry climates since 1984, the Aral ranks first. It is also the only one that leaves a large surface of known age: 13,380 km² that never flooded again, 37 times more than the next lake.
+- **What it is for.** A 90 km field route for testing instruments, a map of salty-dust source ground, and a quick elevation test for Martian salt deposits.
+
 ## Summary
 
 Mars had lakes that dried up and left salts behind. The Aral Sea is doing the same thing now, and satellites have recorded it every year since 1984. We dated when each 30 m piece of the Aral seabed dried out, then asked whether the surface minerals change with that date.
@@ -61,6 +71,17 @@ Median of the 12 scenes; each scene weighted by pixel count within its drying ye
 Using band depth instead of pixel counts gives the same directions.
 
 Our interpretation: when salty water evaporates, the least soluble minerals come out first (carbonates), then gypsum, then the most soluble salts. The Aral grew saltier as it shrank, so ground exposed early was left by fresher water and ground exposed late by concentrated brine. Xi et al. (2025) describe the same order in Aral sediments. The clay trend runs against the simple expectation that finer, clay-rich sediment collects toward the center; one possible reason is that salt crusts on young ground hide the clay signal. That is a hypothesis we did not test.
+
+**Ground truth from published field work.** We took no samples, so we compared our orbital trends with what others found on the ground:
+
+| Our result from orbit | Published field and lab results | Agree? |
+|---|---|---|
+| Carbonate falls from old to young ground | Carbonates decrease from the older coastline towards the newly exposed seabed (Jiang et al. 2021, as summarized by Xi et al. 2025) | Yes |
+| Salt-type label rises from old to young ground | Evaporite minerals increase towards the new seabed (Jiang et al. 2021). Seabed that dried in the 1960s–70s has low salinity, while seabed from the 1980s–90s turned into salt deserts (Singer et al.) | Yes |
+| Clays fall from old to young ground | Clays *increase* towards the new seabed (Jiang et al. 2021). But clay-crusted takyr soils dominate the outer, older rim, and young solonchak soils are covered by salt crusts (Argaman et al. 2006) | No, which supports the idea that salt crusts hide clay from orbit |
+| What the unvalidated "Mg-perchlorate" label may really be | Aral salt crusts contain halite plus sodium and magnesium sulfates such as thenardite and epsomite, together with gypsum (surface-crust study of the southern Aral basin) | Hydrated Mg sulfates are a plausible match; a hypothesis |
+
+So two of our three mineral trends agree with field work. The third disagrees in a way that points to a known pitfall of orbital spectroscopy, on Mars as well as on Earth: thin salt crusts can hide what lies beneath.
 
 ### 3. A second instrument agrees: Landsat 8/9, whole basin, three summers
 
@@ -140,6 +161,23 @@ The Aral left 13,400 km² of ground that never flooded again, 38% of what its la
 
 Limits: the search compares only 1984 and 2021. Lakes that were unusually high in 1984 look larger: Great Salt Lake reached record levels in the mid-1980s. Lakes that dried before 1984, such as Owens Lake and Lop Nur, are missed. Names were assigned by hand from coordinates.
 
+### 8. A field route for testing instruments, and a map of dust-source ground
+
+**A 90 km route across 36 years of drying** (`field_route.py`). If the Aral is to serve as a test site for orbital or rover instruments on an evaporite sequence of known age, people need places to go. We picked four stops. Each is a 1 km patch where at least 90% of the 60 m cells dried in one period and never flooded again, and stops were chained so each lies within 40 km of the previous one.
+
+![Field route across the dried Aral seabed](field_route.png)
+
+| Stop | Dried | Latitude, longitude | What 12 EMIT scenes see most (share of pixels) |
+|---|---|---|---|
+| 1 | 2015–2021 | 45.333 N, 59.884 E | salt-type label 47% |
+| 2 | 2005–2014 | 45.234 N, 59.929 E | clays 37%, gypsum 32% |
+| 3 | 1995–2004 | 45.035 N, 60.354 E | clays 57%, salt-type label 5% |
+| 4 | 1985–1994 | 44.995 N, 60.838 E | clays 60%, gypsum 10%, carbonate 4% |
+
+Walking or driving from stop 1 to stop 4 crosses the evaporite sequence backwards in time: salts, then gypsum, then clay and carbonate. A team could check orbital mineral maps against samples at each stop, test whether an instrument can tell the stages apart, or practise rover traverses on salt crust and on fine dusty ground. The coordinates come from orbital data only; nobody has visited these stops for this project.
+
+**A map of dust-source ground.** The Aralkum is one of the most active dust sources in Central Asia, and its north-eastern part is among the most active areas (Indoitu et al. 2015). Field studies describe two kinds of source ground. Clay-crusted takyr soils on the older outer rim erode easily, while young salt-crusted soils resist wind better (Argaman et al. 2006). Dust collected near the Aralkum carries much more sulfate and chloride than dust from sandy deserts (Groll et al. 2019). Our map separates these grounds: 15,415 km² inside the basin dried before 1984 (the outer rim), and 34,964 km² is dated year by year since then, including 5,759 km² that dried in 2015–2021. That could help dust modellers, and the people planting shrubs to fix the seabed, decide where to work. Martian dust also carries salts, so the same ground is a natural test site for salty-dust instruments.
+
 ## What this means for Mars
 
 | Mars site | Where the Aral analogy works | Where it breaks |
@@ -196,6 +234,8 @@ Limits: the search compares only 1984 and 2021. Lakes that were unusually high i
 | `finder_rank.py`, `global_drying_lakes.csv`, `finder_top_lakes.csv` | Python and tables: groups basins into lake regions and ranks them |
 | `step5_second_lake.js` | Earth Engine: drying-year map for a second lake (Lake Urmia) |
 | `step6_datable_ground.js`, `datable_ground.csv`, `datable_chart.py` | Earth Engine, table and chart: how much ground each top lake left that never flooded again |
+| `field_route.py`, `field_route.csv`, `field_route.png` | Python: the four-stop field route with EMIT mineral shares |
+| `slide_charts.py`, `drying_map.png` | Python: slide-sized charts, including the drying map at the top of this page |
 | `app.js` | Earth Engine: the public map app |
 | `emit_io.py` | Python: readers for AppEEARS ENVI files and the Earth Engine GeoTIFF |
 | `emit_vs_retreat.py`, `plot_zones.py` | Python: first 4-scene analysis and chart |
@@ -234,7 +274,7 @@ No AI-generated images, video or audio are used.
 
 ## References
 
-- Xi, X. et al. (2025). Analysis of a saline dust storm from the Aralkum Desert, Part 1. *Atmos. Chem. Phys.* 25, 7403.
+- Xi, X. et al. (2025). Analysis of a saline dust storm from the Aralkum Desert, Part 1. *Atmos. Chem. Phys.* 25, 7403. (Also summarizes Jiang et al. 2021 on mineral gradients across the seabed.)
 - Pekel, J.-F. et al. (2016). High-resolution mapping of global surface water and its long-term changes. *Nature* 540, 418–422.
 - Green, R. (2023). EMIT L2B Estimated Mineral Identification and Band Depth and Uncertainty 60 m V001. NASA LP DAAC.
 - Micklin, P. (2014). Chapter 15 in *The Aral Sea*, Springer Earth System Sciences. https://doi.org/10.1007/978-3-642-02356-9_15
@@ -253,4 +293,9 @@ No AI-generated images, video or audio are used.
 - Yao, F. et al. (2023). Satellites reveal widespread decline in global lake water storage. *Science* 380, 743–749.
 - Lehner, B. & Grill, G. (2013). Global river hydrography and network routing: baseline data and new approaches to study the world's large river systems. *Hydrological Processes* 27, 2171–2186.
 - Abatzoglou, J. T. et al. (2018). TerraClimate, a high-resolution global dataset of monthly climate and climatic water balance from 1958–2015. *Scientific Data* 5, 170191.
+- Argaman, E., Singer, A. & Tsoar, H. (2006). Erodibility of some crust forming soils/sediments from the Southern Aral Sea Basin as determined in a wind tunnel. *Earth Surface Processes and Landforms* 31, 47–63.
+- Groll, M. et al. (2019). Physical and chemical characterization of dust deposited in the Turan Lowland (Central Asia). *E3S Web of Conferences* 99, 03005.
+- Indoitu, R. et al. (2015). Dust emission and environmental changes in the dried bottom of the Aral Sea. *Aeolian Research* 17, 101–115.
+- Singer, A. et al. Aral Sea. *Mitteilungen der IAG BOKU* 13, 99–116. https://opac.geologie.ac.at/ais312/dokumente/Mitt_IAG_Boku_13_099_116_SINGER_ET_AL.pdf
+- Surface crusts on soils/sediments of the southern Aral Sea basin, Uzbekistan. https://www.researchgate.net/publication/223680211
 - AppEEARS Team (2026). AppEEARS v3.137. NASA EOSDIS LP DAAC.
