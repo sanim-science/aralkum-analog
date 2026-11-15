@@ -6,12 +6,14 @@ NASA Space Apps Challenge 2026 · Challenge: *Identify Earth Locations that Anal
 
 **Live map:** https://noble-maxim-504110-d7.projects.earthengine.app/view/aralkum-analog
 
+**Scope:** the challenge asks for analogs of permanent Moon-base locations or future Mars landing sites. We chose Mars, because a salt lake drying by evaporation is a Mars process with no counterpart on the Moon. The Zhamanshin impact structure (section 5) is the part that also matters for the Moon.
+
 ## In 30 seconds
 
 ![The eastern Aral seabed coloured by the year the lake left each 60 m cell](drying_map.png)
 
 - **A dated seabed.** We dated 34,964 km² of the dried Aral seabed pixel by pixel, 1985–2021, from NASA/USGS Landsat water history.
-- **Minerals follow the date.** NASA EMIT sees carbonate and clay where the sea left first, gypsum in the middle and salts last, in 12 of 12 scenes. Two of the three trends match published field work.
+- **Minerals follow the date.** NASA EMIT sees carbonate and clay where the sea left first, gypsum in the middle and salts last. Clays fall with drying date in 12 of 12 scenes and the salt-type label rises in 11 of 11. Two of the three trends match published field work.
 - **Tested on Mars.** 642 Martian salt deposits sit in closed lows (60% vs 38% of the ground nearby), but not in the last-to-dry part where the Aral puts salts (20% vs 23% by chance). Most Martian salts probably formed in small ponds, not in one big drying lake.
 - **A global search.** Of all lakes that dried in dry climates since 1984, the Aral ranks first. It is also the only one that leaves a large surface of known age: 13,380 km² that never flooded again, 37 times more than the next lake.
 - **What it is for.** A 90 km field route for testing instruments, a map of salty-dust source ground, and a quick elevation test for Martian salt deposits.
